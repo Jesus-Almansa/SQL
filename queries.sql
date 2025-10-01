@@ -1,2 +1,2 @@
-use cursoSQL;
-DROP DATABASE cursoSQL;
+use spotify;
+DROP DATABASE spotify;
