@@ -31,3 +31,6 @@ obj/
 
 # VSCODE files
 .vscode/
+
+# MySQL files
+mysql_data/
