@@ -1,0 +1,15 @@
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql5
+    restart: on-failure
+    environment:
+      MYSQL_DATABASE: "jisap_serrata"
+      MYSQL_ROOT_PASSWORD: "picasent10"
+    ports:
+      - "3306:3306" # Mapea el puerto del contenedor 3306 al 3306 de tu máquina
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    # command:
+    #   - --default-authentication-plugin=mysql_native_password
+    #   - --innodb_file_per_table=1

@@ -1,0 +1,16 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql8
+    restart: on-failure
+    environment:
+      MYSQL_DATABASE: "jisap_serrata"
+      MYSQL_ROOT_PASSWORD: "picasent10"
+    ports:
+      - "3306:3306" # Mapea el puerto del contenedor 3306 al 3306 de tu máquina
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+      # - ./my.cnf:/etc/mysql/conf.d/my.cnf
+    command: >
+      --default-authentication-plugin=mysql_native_password --innodb_file_per_table=1
+      --innodb_redo_log_capacity=1G
