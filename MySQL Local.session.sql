@@ -77,5 +77,41 @@ CREATE TABLE IF NOT EXISTS playlist_borrada (
     FOREIGN KEY (playlist_activa_id) REFERENCES playlist_activa(playlist_activa_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (usuario_premium_id) REFERENCES usuarios_premium(usuario_premium_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+CREATE TABLE IF NOT EXISTS artistas (
+    artista_id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    genero_musical VARCHAR(50),
+    pais_origen VARCHAR(50),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS albumes (
+    album_id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(100) NOT NULL,
+    fecha_lanzamiento DATE,
+    genero VARCHAR(50),
+    artista_id INT NOT NULL,
+    FOREIGN KEY (artista_id) REFERENCES artistas(artista_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE IF NOT EXISTS canciones (
+    cancion_id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(100) NOT NULL,
+    duracion TIME,
+    numero_reproducciones INT NOT NULL,
+    genero VARCHAR(50),
+    album_id INT NOT NULL,
+    artista_id INT NOT NULL,
+    FOREIGN KEY (album_id) REFERENCES albumes(album_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (artista_id) REFERENCES artistas(artista_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE IF NOT EXISTS cancion_added (
+    cancion_added_id INT PRIMARY KEY AUTO_INCREMENT,
+    cancion_id INT NOT NULL,
+    playlist_activa_id INT NOT NULL,
+    usuario_premium_id INT NOT NULL,
+    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (playlist_activa_id) REFERENCES playlist_activa(playlist_activa_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (usuario_premium_id) REFERENCES usuarios_premium(usuario_premium_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+-- Ejemplo de inserción de datos
 SELECT *
 FROM usuarios;
